@@ -11,13 +11,32 @@ class App extends StatefulComponent {
 class _AppState extends State<App> {
   @override
   Iterable<Component> build(BuildContext context) sync* {
+    const Map<String, String> styleForDiv = {
+      "display": "flex",
+      "flex-direction": "column",
+      "justify-content": "center",
+    };
+
+    const Map<String, String> styleForH5 = {
+      "text-align": "center",
+    };
+
+    const Map<String, String> styleForH2 = {
+      "text-align": "center",
+    };
+
+    const Map<String, String> styleForSmallDiv = {
+      "display": "flex",
+      "justify-content": "center",
+    };
+
+
     yield DomComponent(
       tag: 'div',
-      styles: const {
-        "display": "flex",
-        "flex-direction": "column",
-        "justify-content": "center",
-      },
+     
+      styles: Styles.raw(
+        styleForDiv,
+      ),
       children: [
         BlocProvider(
           create: (context) => CounterCubit(),
@@ -25,9 +44,9 @@ class _AppState extends State<App> {
             builder: (context, state) sync* {
               yield const DomComponent(
                 tag: "h5",
-                styles: {
-                  "text-align": "center",
-                },
+                styles: Styles.raw(
+                  styleForH5
+                ),
                 children: [
                   Text(
                     "Press plus button to increment the counter with jaspr bloc!",
@@ -36,18 +55,17 @@ class _AppState extends State<App> {
               );
               yield DomComponent(
                 tag: 'h2',
-                styles: const {
-                  "text-align": "center",
-                },
+                styles: Styles.raw(
+                  styleForH2
+                ),
                 child: Text(state.toString()),
               );
 
               yield DomComponent(
                 tag: 'div',
-                styles: const {
-                  "display": "flex",
-                  "justify-content": "center",
-                },
+                styles: Styles.raw(
+                  styleForSmallDiv
+                ),
                 child: DomComponent(
                   tag: 'button',
                   events: {
